@@ -2,7 +2,7 @@
 
 ###codebreaker_spec.rb
 
- section [D] :  there's no exact match
+ section [D], test 3 :  there's no exact match
 
 - If the code is correct, this test will never pass.
 - If the test passes, there's something wrong with the code :-)
@@ -19,15 +19,13 @@
 
 Replacing `'1234'` with `secret_number` fixed it.
 
+Section [G], test 3: description is wrong
 
+​      `it "a number match at the end overrules a number match" do`
 
-###codebreaker.rb, codebreaker_spec.rb
+should be 
 
-"Try guessing a number with four digits"
-
-0 is a digit
-
-->  "Try guessing a number with four digits (1-9)"
+​      `it "an exact match at the end overrules a number match" do`
 
 
 
@@ -35,7 +33,9 @@ Replacing `'1234'` with `secret_number` fixed it.
 
 ## README.md
 
-I found out that if you fork and clone, then try to push to your fork, the default merge target is the original clone, not the forked one. Maybe check this is correct, and mention this in the README.md if so.
+I found out that after you fork and clone your forked repository, then push commits to your forked repository, when merging, the default merge target is the original repository, not the forked repository.
+
+Maybe check if this is correct, and, if so, mention this in the README.md.
 
 
 

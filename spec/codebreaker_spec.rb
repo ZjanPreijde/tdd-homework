@@ -120,6 +120,7 @@ RSpec.describe Codebreaker do
       end
 
       it "1 exact match and 1 number match (in that order) sends a mark with '+-'" do
+        # game.start('1234')
         game.start(secret_number)
         input = '4151'
         expect(output).to receive(:puts).with('+-')
@@ -233,6 +234,27 @@ RSpec.describe Codebreaker do
 
         game.guess(input)
       end
+    end
+
+    context "[Zjan] with various invalid input" do
+      it "space in input" do
+        expect(output).to receive(:puts).with("Try guessing a number with four digits")
+        input = '5 11'
+        game.guess(input)
+      end
+
+      it "character in input" do
+        expect(output).to receive(:puts).with("Try guessing a number with four digits")
+        input = '11z1'
+        game.guess(input)
+      end
+
+      it "negative number in input" do
+        expect(output).to receive(:puts).with("Try guessing a number with four digits")
+        input = '-100'
+        game.guess(input)
+      end
+
     end
   end
 end

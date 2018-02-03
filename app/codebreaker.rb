@@ -1,7 +1,5 @@
 class Codebreaker
   REQUIRED_INPUT_LENGTH = 4
-  INPUT_LIMIT_LOW       = 0
-  INPUT_LIMIT_HIGH      = 9999
   class Game
     attr_reader :output
 
@@ -22,18 +20,12 @@ class Codebreaker
     end
 
     def return_result
-      # This fails for "333"/"55555"
-      return "Try guessing a number with four digits" if @input.length != REQUIRED_INPUT_LENGTH
-      return "Try guessing a number with four digits" if !correct_format?
+      return "Try guessing a number with four digits" if !correct_input?
       check_input
     end
 
-    def correct_format?
-      # This does not fail for "333"/"55555"
-      return false if @input.length != REQUIRED_INPUT_LENGTH
-      return false if !correct_length?
-      return false if !correct_format?
-      return false if !correct_range?
+    def correct_input?
+      correct_length? && correct_format?
     end
 
     def correct_length?
@@ -43,10 +35,6 @@ class Codebreaker
 
     def correct_format?
       !@input[/\d{4}/].nil?
-    end
-
-    def correct_range?
-      @input.to_i.between?( INPUT_LIMIT_LOW, INPUT_LIMIT_HIGH )
     end
 
     def check_input
