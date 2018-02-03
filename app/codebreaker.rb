@@ -4,6 +4,7 @@ class Codebreaker
 
     def initialize(output)
       @output = output
+      @input  = ""
     end
 
     def start(secret_number)
@@ -14,10 +15,18 @@ class Codebreaker
     end
 
     def guess(input)
-      # Make sure to replace next line with the actual implemented marking algorithm,
-      # using the @secret_number
-
-      output.puts "you typed '#{input}'"
+      @input = input
+      output.puts return_result
     end
+
+    def return_result
+      return "Try guessing a number with four digits" if !correct_format?
+      "You typed something"
+    end
+
+    def correct_format?
+      @input.to_i.between?(1111, 9999)
+    end
+
   end
 end
