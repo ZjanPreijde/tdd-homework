@@ -35,6 +35,10 @@ Replacing `'1234'` with `secret_number` fixed it.
 
 ## README.md
 
+I found out that if you fork and clone, then try to push to your fork, the default merge target is the original clone, not the forked one. Maybe check this is correct, and mention this in the README.md if so.
+
+
+
 "If you implementat of the `#guess` method in alphabetical order of these context, ..."
 
 "to solve ther logical error, "
