@@ -236,7 +236,7 @@ RSpec.describe Codebreaker do
       end
     end
 
-    context "[Zjan] with various invalid input" do
+    context "[Zjan-1] with various invalid input" do
       it "space in input" do
         expect(output).to receive(:puts).with("Try guessing a number with four digits")
         input = '5 11'
@@ -256,5 +256,16 @@ RSpec.describe Codebreaker do
       end
 
     end
+
+    context "[Zjan-2] with almost right guess" do
+      it "test 4434 - 4443" do
+        game.start("4434")
+        expect(output).to receive(:puts).with("++--")
+        input = '4443'
+        game.guess(input)
+      end
+
+    end
+
   end
 end

@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift(File.expand_path('../../app', __FILE__))
+require 'codebreaker'
+
+game = Codebreaker::Game.new(STDOUT)
+puts "Please give me a secret number to test with (0000-9999)"
+secret_number = gets.chomp
+# secret_number = '4321'
+game.start(secret_number)
+
+while (guess = gets.chomp)
+  game.guess(guess)
+end

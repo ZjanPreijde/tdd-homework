@@ -29,7 +29,6 @@ class Codebreaker
     end
 
     def correct_length?
-      # This does not fail for "333"/"55555"
       @input.length == REQUIRED_INPUT_LENGTH
     end
 
