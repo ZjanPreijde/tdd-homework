@@ -22,8 +22,6 @@ class Codebreaker
     def return_result
       return "Try guessing a number with four digits" if !correct_format?
       return '' if no_matches?
-      return '+' if has_one_on_position?
-      return '-' if has_one_anywhere?
       get_result
     end
 
@@ -59,8 +57,26 @@ class Codebreaker
       return false
     end
 
+    def check_input
+      @result = ""
+      (0..3).each do | n |
+        if @secret_number[n] == @input[n]
+          @input[n] = "+"
+          @result  += "+"
+        end
+      end
+
+      (0..3).each do |n|
+        if @secret_number.include?(@input[n])
+          @input.gsub!(@input[n], "-")
+          @result += "-"
+        end
+      end
+      return @result #+ " <= " + @input
+    end
+
     def get_result
-      'TODO'
+      check_input
     end
 
   end
