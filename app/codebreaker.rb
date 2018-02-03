@@ -22,6 +22,8 @@ class Codebreaker
     def return_result
       return "Try guessing a number with four digits" if !correct_format?
       return '' if no_matches?
+      return '+' if has_one_on_position?
+      return '-' if has_one_anywhere?
       get_result
     end
 
@@ -34,6 +36,27 @@ class Codebreaker
         return false if @secret_number.include?(@input[n])
       end
       return true  # Is this necessary?
+    end
+
+    def no_matches?
+      (0..3).each do | n |
+        return false if @secret_number.include?(@input[n])
+      end
+      return true  # Is this necessary?
+    end
+
+    def has_one_anywhere?
+      (0..3).each do | n |
+        return true if @secret_number.include?(@input[n])
+      end
+      return false
+    end
+
+    def has_one_on_position?
+      (0..3).each do | n |
+        return true if @secret_number[n] == @input[n]
+      end
+      return false
     end
 
     def get_result
