@@ -33,37 +33,40 @@ class Codebreaker
     end
 
     def correct_format?
-      !@input[/\d{4}/].nil?
+      !@input[/\d{#{REQUIRED_INPUT_LENGTH}}/].nil?
     end
 
     def check_input
       @result = ""
-      check_for_exact
-      clean_up_before_number
-      check_for_number
+      check_for_exacts
+      check_for_numbers
       return @result
     end
 
-    def check_for_exact
+    def check_for_exacts
       (0..REQUIRED_INPUT_LENGTH - 1).each do | n |
-        @result += @input[n] if @secret_number[n] == @input[n]
+        check_exact(n)
       end
     end
 
-    def clean_up_before_number
-      (0..@result.length - 1).each do | n |
-        @input.gsub!(@result[n], " ")
-      end
-      @result = "+" * @result.length
+    def check_exact(n)
+      return if @secret_number[n] != @input[n]
+      @input[n]         = " "
+      @secret_number[n] = " "
+      @result          += "+"
     end
 
-    def check_for_number
+    def check_for_numbers
       (0..REQUIRED_INPUT_LENGTH - 1).each do |n|
-        if @secret_number.include?(@input[n])
-          @input.gsub!(@input[n], " ")
-          @result += "-"
-        end
+        check_number(n) if @input[n] != " "
       end
+    end
+
+    def check_number(n)
+      found_at = @secret_number.index(@input[n])
+      return if found_at.nil?
+      @secret_number[found_at] = " "
+      @result                 += "-"
     end
 
   end
